@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Information</title>
+    <link rel="stylesheet" href="styles.css">
+<style type="text/css" id="dcoder_stylesheet">body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #0073e6;
+    color: white;
+}
+
+header h1 {
+    margin: 0 0 10px;
+}
+
+header input {
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    border: none;
+    border-radius: 5px;
+}
+
+main {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    padding: 15px;
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+.card h2 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+}
+
+.card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}</style></head>
+<body>
+    <header>
+        <h1>World Countries Information</h1>
+        <input type="text" id="searchBox" placeholder="Search for a country...">
+    </header>
+    <main id="countryList"></main>
+    <script src="script.js"></script>
+
+<script type="text/javascript" id="dcoder_script">const countries = [
+    { name: "United States", capital: "Washington, D.C.", flag: "https://flagcdn.com/us.svg" },
+    { name: "India", capital: "New Delhi", flag: "https://flagcdn.com/in.svg" },
+    { name: "Japan", capital: "Tokyo", flag: "https://flagcdn.com/jp.svg" },
+    { name: "France", capital: "Paris", flag: "https://flagcdn.com/fr.svg" },
+    { name: "Germany", capital: "Berlin", flag: "https://flagcdn.com/de.svg" },
+    // Add more countries here...
+];
+
+const searchBox = document.getElementById("searchBox");
+const countryList = document.getElementById("countryList");
+
+function displayCountries(filteredCountries) {
+    countryList.innerHTML = "";
+    filteredCountries.forEach(country => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = `
+            <img src="${country.flag}" alt="Flag of ${country.name}">
+            <h2>${country.name}</h2>
+            <p>Capital: ${country.capital}</p>
+        `;
+        countryList.appendChild(card);
+    });
+}
+
+// Display all countries initially
+displayCountries(countries);
+
+// Add search functionality
+searchBox.addEventListener("input", () => {
+    const query = searchBox.value.toLowerCase();
+    const filteredCountries = countries.filter(country =>
+        country.name.toLowerCase().includes(query)
+    );
+    displayCountries(filteredCountries);
+});
+</script></body></html>
